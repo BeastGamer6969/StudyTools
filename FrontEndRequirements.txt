@@ -1,0 +1,35 @@
+Frontend — HTML Interface
+
+    * Provides the visual interface for StudyTools.
+
+    * Built using HTML, CSS and JavaScript.
+
+    * Communicates with the local backend.
+
+    * Dashboard showing an overview of the user's study information.
+
+    * Homework interface.
+
+    * Calendar displaying homework and deadlines.
+
+    * Homework creation and editing interface.
+
+    * Notes interface.
+
+    * Subject overview.
+
+    * Assessment and percentage tracking interface.
+
+    * Practice exam tracking interface.
+
+    * Graphs showing academic and practice-exam performance.
+
+    * HSC/ATAR estimation interface.
+
+    * Settings/configuration interface.
+
+    * Allows users to mark homework as completed.
+
+    * Allows users to view, edit and organise their stored information.
+
+    * Designed to work like a normal website, despite being served by the local StudyTools program.
