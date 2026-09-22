@@ -6,10 +6,11 @@ Backend — StudyTools Local Program
 
     * Stores:
         * Homework
-        * Notes
-        * Subjects
+            - id(UUID), Task, Due Date, Notes, Subject, status, prioritry
+        * Practice Exam
+            - id, name, type(file or link), file/link
         * Assessment results
-        * Assessment weightings
+             - id, name, type(file or link), file/link, Assessment weightings
         * Practice exams
         * HSC/ATAR data
 
