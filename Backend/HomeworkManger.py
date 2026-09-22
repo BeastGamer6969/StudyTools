@@ -1,23 +1,10 @@
 import os
 import sqlite3
 
-# Convert reltive path to aboslute
-ReltivePath = "Data/Homework.db"
-AbsolutePath = os.path.join(os.path.dirname(os.path.abspath(__file__)),ReltivePath)
+# Convert relative path to aboslute
+RelativePath = "Data/Homework.db"
+AbsolutePath = os.path.join(os.path.dirname(os.path.abspath(__file__)),RelativePath)
 # print(AbsolutePath)
-
-# # Create Table - id, Task, Due Date, Notes, Subject, status, prioritry
-# cursor.execute("""
-#     CREATE TABLE Homework(
-#         id INTERGER PRIMARY KEY,
-#         Task TEXT NOT NULL,
-#         DueDate DATETIME,
-#         Notes TEXT,
-#         Subject TEXT,
-#         status TEXT,
-#         priority TEXT
-#     )
-#     """)
 
 class HomeworkManger:
     def __init__(self, Path):
@@ -43,7 +30,7 @@ class HomeworkManger:
         # Close the connection to the database
         conn.close()
 
-    def AlterHomework (self, Task, DueDate = None, Notes = None, Subject = None, Status = None, Priority = None):
+    def AlterHomework (self, id, Task, DueDate = None, Notes = None, Subject = None, Status = None, Priority = None):
         # Connection to Database
         conn = sqlite3.connect(self.path)
 
@@ -68,14 +55,29 @@ if "__main__" == __name__:
     # Create cursor in the database
     cursor = conn.cursor()
 
+    # # Delete the Homework table
+    # cursor.execute("DROP TABLE Homework")
+
+    # # Create Table - id, Task, Due Date, Notes, Subject, status, prioritry
+    # cursor.execute("""
+    #     CREATE TABLE Homework(
+    #         id INTEGER PRIMARY KEY,
+    #         Task TEXT NOT NULL,
+    #         DueDate DATETIME,
+    #         Notes TEXT,
+    #         Subject TEXT,
+    #         status TEXT,
+    #         priority TEXT
+    #     )
+    #     """)
+
     # Make a query to the Database
     cursor.execute("SELECT * FROM Homework")
 
     # Fetch the data form query
-    print(cursor.fetchall())
-
-    # Commit changes
-    conn.commit()
+    items = cursor.fetchall()
+    for item in items:
+        print(item)
 
     # Close the connection to the database
     conn.close()
