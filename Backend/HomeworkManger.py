@@ -6,7 +6,7 @@ RelativePath = "Data/Homework.db"
 AbsolutePath = os.path.join(os.path.dirname(os.path.abspath(__file__)),RelativePath)
 # print(AbsolutePath)
 
-class HomeworkManger:
+class DatabaseManger:
     def __init__(self, Path):
         self.path = Path
 
@@ -30,7 +30,7 @@ class HomeworkManger:
         # Close the connection to the database
         conn.close()
 
-    def AlterHomework (self, id, Task, DueDate = None, Notes = None, Subject = None, Status = None, Priority = None):
+    def AlterHomework (self, id, Task=None, DueDate = None, Notes = None, Subject = None, Status = None, Priority = None):
         # Connection to Database
         conn = sqlite3.connect(self.path)
 
