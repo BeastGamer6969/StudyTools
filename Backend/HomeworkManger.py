@@ -1,16 +1,18 @@
 import os
 import sqlite3
+from pathlib import Path
 
-# Convert relative path to aboslute
+# Convert relative path to absolute
 RelativePath = "Data/Homework.db"
 AbsolutePath = os.path.join(os.path.dirname(os.path.abspath(__file__)),RelativePath)
 # print(AbsolutePath)
 
 class DatabaseManger:
-    def __init__(self, Path):
-        self.path = Path
+    def __init__(self, path):
+        self.path = path
+        self.Name = Path(path).stem
 
-    def AddHomework (self, Task, DueDate = None, Notes = None, Subject = None, Status = None, Priority = None):
+    def Addvalue (self, Task, DueDate = None, Notes = None, Subject = None, Status = None, Priority = None):
         # Connection to Database
         conn = sqlite3.connect(self.path)
 
@@ -18,8 +20,8 @@ class DatabaseManger:
         cursor = conn.cursor()
 
         # Insert Data into the Table
-        cursor.execute("""
-            INSERT INTO Homework
+        cursor.execute(f"""
+            INSERT INTO {self.Name}
             (Task, DueDate, Notes, Subject, Status, Priority)
             VALUES(?,?,?,?,?,?)
             """ , (Task, DueDate, Notes, Subject, Status, Priority))
@@ -30,7 +32,51 @@ class DatabaseManger:
         # Close the connection to the database
         conn.close()
 
-    def AlterHomework (self, id, Task=None, DueDate = None, Notes = None, Subject = None, Status = None, Priority = None):
+    def _AlterValue (self, Id, ColoumName, Value):
+        # Connection to Database
+        conn = sqlite3.connect(self.path)
+
+        # Create cursor in the database
+        cursor = conn.cursor()
+
+        # Cammand to run in the database
+        Cammand = f"""
+            UPDATE {self.Name}
+            SET {ColoumName} = '{Value}'
+            WHERE id = {Id}
+            """
+        # Print the cammand - Debug
+        print(Cammand)
+
+        # Update Data in the Table
+        cursor.execute(Cammand)
+
+        # Commit changes
+        conn.commit()
+
+        # Close the connection to the database
+        conn.close()
+
+    def AlterValues (self, Id, Task=None, DueDate = None, Notes = None, Subject = None, Status = None, Priority = None):
+        if Task != None:
+            self._AlterValue(Id, "Task", Task)
+
+        if DueDate != None:
+            self._AlterValue(Id, "DueDate", DueDate)
+
+        if Notes != None:
+            self._AlterValue(Id, "Notes", Notes)
+
+        if Subject != None:
+            self._AlterValue(Id, "Subject", Subject)
+
+        if Status != None:
+            self._AlterValue(Id, "Status", Status)
+
+        if Priority != None:
+            self._AlterValue(Id, "Priority", Priority)
+
+    def DeleteValues (self, Id):
         # Connection to Database
         conn = sqlite3.connect(self.path)
 
@@ -38,15 +84,33 @@ class DatabaseManger:
         cursor = conn.cursor()
 
         # Insert Data into the Table
-        cursor.execute("""
-            INSERT INTO Homework VALUES(?,?,?,?,?,?)
-            """ , [(Task, DueDate, Notes, Subject, Status, Priority)])
+        cursor.execute(f"DELETE from {self.Name} Where id = {Id}")
 
         # Commit changes
         conn.commit()
 
         # Close the connection to the database
         conn.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 if "__main__" == __name__:
     # Connection to Database
@@ -77,7 +141,7 @@ if "__main__" == __name__:
     # Fetch the data form query
     items = cursor.fetchall()
     for item in items:
-        print(item)
+        print(f"{item}\n")
 
     # Close the connection to the database
     conn.close()
