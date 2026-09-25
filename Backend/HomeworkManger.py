@@ -32,7 +32,7 @@ class DatabaseManger:
         # Close the connection to the database
         conn.close()
 
-    def _AlterValue (self, Id, ColoumName, Value):
+    def _AlterValue (self, Id, ColumnName, Value):
         # Connection to Database
         conn = sqlite3.connect(self.path)
 
@@ -42,7 +42,7 @@ class DatabaseManger:
         # Cammand to run in the database
         Cammand = f"""
             UPDATE {self.Name}
-            SET {ColoumName} = '{Value}'
+            SET {ColumnName} = '{Value}'
             WHERE id = {Id}
             """
         # Print the cammand - Debug
