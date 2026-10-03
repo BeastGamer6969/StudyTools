@@ -1,3 +1,4 @@
+from xmlrpc.client import boolean
 import random
 
 from HomeworkManger import *
@@ -59,5 +60,8 @@ def RandomData(NumberOfData, object):
         object.Addvalue(Task, DueDate, Note, Subject, Status, Priority)
 
 Test = DatabaseManger(AbsolutePath)
+
 # RandomData(10, Test)
 Test.DeleteValues(1)
+
+Test.GetValues()

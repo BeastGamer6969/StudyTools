@@ -92,7 +92,50 @@ class DatabaseManger:
         # Close the connection to the database
         conn.close()
 
+    def GetValues(self, Task=None, DueDate = None, Notes = None, Subject = None, Status = None, Priority = None):
+        filters = []
+        if Task != None:
+            filters.append(f"Task = {Task}")
 
+        if DueDate != None:
+            filters.append(f"DueDate = {DueDate}")
+
+        if Notes != None:
+            filters.append(f"Notes = {Notes}")
+
+        if Subject != None:
+            filters.append(f"Subject = {Subject}")
+
+        if Status != None:
+           filters.append(f"Status = {Status}")
+
+        if Priority != None:
+            filters.append(f"Priority = {Priority}")
+
+        # Creating the cammand to query the database
+        Query = f"Select * FROM {self.Name}"
+        if filters:
+            Query += f" WHERE {",".join(filters)}"
+
+        #print(Query)
+
+        # Connection to Database
+        conn = sqlite3.connect(self.path)
+
+        # Create cursor in the database
+        cursor = conn.cursor()
+
+        # Insert Data into the Table
+        cursor.execute(Query)
+
+        # Fetch the result of the query
+         cursor.fetchall()
+
+        # Commit changes
+        conn.commit()
+
+        # Close the connection to the database
+        conn.close()
 
 
 
