@@ -129,7 +129,7 @@ class DatabaseManger:
         cursor.execute(Query)
 
         # Fetch the result of the query
-         cursor.fetchall()
+        cursor.fetchall()
 
         # Commit changes
         conn.commit()
