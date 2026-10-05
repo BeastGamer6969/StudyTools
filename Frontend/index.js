@@ -2,4 +2,3 @@
 console.log("Hey");
 
 let Name = "Hello";
-console.log(Name);
