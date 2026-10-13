@@ -129,13 +129,15 @@ class DatabaseManger:
         cursor.execute(Query)
 
         # Fetch the result of the query
-        cursor.fetchall()
+        results = cursor.fetchall()
 
         # Commit changes
         conn.commit()
 
         # Close the connection to the database
         conn.close()
+
+        return results
 
 
 

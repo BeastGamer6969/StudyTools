@@ -1,4 +1,3 @@
-from xmlrpc.client import boolean
 import random
 
 from HomeworkManger import *
@@ -13,14 +12,14 @@ def RandomData(NumberOfData, object):
         "Read history chapter",
         "Work on project",
         "Finish worksheet",
-        "Revise notes"
+        "Revise notes",
     ]
     DueDates = [
         "2026-09-25 15:00:00",
         "2026-09-26 17:00:00",
         "2026-09-27 12:00:00",
         "2026-09-28 15:30:00",
-        "2026-09-29 18:00:00"
+        "2026-09-29 18:00:00",
     ]
     Notes = [
         "Finish all questions",
@@ -28,7 +27,7 @@ def RandomData(NumberOfData, object):
         "Ask teacher if stuck",
         "Complete before the weekend",
         "Check answers before submitting",
-        ""
+        "",
     ]
     Subjects = [
         "Maths",
@@ -36,18 +35,10 @@ def RandomData(NumberOfData, object):
         "Science",
         "Software Engineering",
         "History",
-        "Industrial Technology"
+        "Industrial Technology",
     ]
-    Statuses = [
-        "Not Done",
-        "In Progress",
-        "Done"
-    ]
-    Priorities = [
-        "Low",
-        "Medium",
-        "High"
-    ]
+    Statuses = ["Not Done", "In Progress", "Done"]
+    Priorities = ["Low", "Medium", "High"]
 
     for i in range(NumberOfData):
         Task = random.choice(Tasks)
@@ -58,6 +49,7 @@ def RandomData(NumberOfData, object):
         Priority = random.choice(Priorities)
 
         object.Addvalue(Task, DueDate, Note, Subject, Status, Priority)
+
 
 Test = DatabaseManger(AbsolutePath)
 
