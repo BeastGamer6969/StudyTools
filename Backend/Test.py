@@ -56,4 +56,4 @@ Test = DatabaseManger(AbsolutePath)
 # RandomData(10, Test)
 Test.DeleteValues(1)
 
-Test.GetValues()
+print(Test.GetValues())
